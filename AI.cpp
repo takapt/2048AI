@@ -58,54 +58,6 @@ bool in_rect(int x, int y, int w, int h) { return 0 <= x && x < w && 0 <= y && y
 
 typedef long long ll;
 
-#ifdef _MSC_VER
-#include <Windows.h>
-#else
-#include <sys/time.h>
-#endif
-class Timer
-{
-    typedef double time_type;
-    typedef unsigned int skip_type;
-
-private:
-    time_type start_time;
-    time_type elapsed;
-
-    skip_type skip;
-    skip_type skip_count;
-
-#ifdef _MSC_VER
-    time_type get_ms() { return (time_type)GetTickCount64() / 1000; }
-#else
-    time_type get_ms() { struct timeval t; gettimeofday(&t, NULL); return (time_type)t.tv_sec * 1000 + (time_type)t.tv_usec / 1000; }
-#endif
-
-public:
-    Timer(skip_type skip)
-        : skip(skip) { }
-    Timer()
-        : skip(1){}
-
-    void start() { start_time = get_ms(); skip_count = 0; }
-    time_type stop() { return elapsed = get_ms() - start_time; }
-    time_type skip_stop()
-    {
-        if (skip_count++ == skip)
-        {
-            skip_count = 0;
-            return stop();
-        }
-        else
-            return -1;
-    }
-
-    void print() { cout << stop() << "ms" << endl; }
-    void print(const char* mes) { cout << mes << ": " << stop() << "ms" << endl; }
-
-    time_type get_elapsed() const { return elapsed; }
-};
-
 
 const int dir_dx[] = { 0, 1, 0, -1 };
 const int dir_dy[] = { 1, 0, -1, 0 };
