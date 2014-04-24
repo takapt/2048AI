@@ -714,8 +714,8 @@ int main()
 {
     srand(time(NULL));
 
-    play_in_browser();
-//     play_in_console();
+//     play_in_browser();
+    play_in_console();
 //     play_in_console(false);
 //     play_loop();
 //     play_in_hackerrank();
